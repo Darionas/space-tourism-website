@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Space tourism website](./assetss/space_tourism.jpg)
+![Space tourism website](./assets/space_tourism.jpg)
 
 ### Links
 

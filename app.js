@@ -1,5 +1,5 @@
 //use strict
-/* jshint esversion: 6 */
+
 
 const nav = document.querySelector('.primary-navigation');
 const navToggle = document.querySelector('.mobile-nav-toggle');

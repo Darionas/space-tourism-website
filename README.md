@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [space_tourism-website](https://github.com/Darionas/space-tourism-website)
+- Live Site URL: [space_tourism-website](https://darionas.github.io/space-tourism-website/)
 
 ## My process
 

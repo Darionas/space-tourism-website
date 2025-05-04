@@ -87,7 +87,7 @@ function populatePage(data, type) {
     const tabs = tabList.querySelectorAll('[role="tab"]');
     tabs.forEach((tab) => {
         tab.addEventListener('click', (e) => {
-            switchTab(e, data);
+            switchTab(e, data, type);
         });
     });
 }
@@ -187,10 +187,11 @@ function createContent(item, index, type) {
 }
 
 function switchTab(e, data) {
+        
     const targetTab = e.target;
     const tabList = targetTab.parentNode;
     const tabs = tabList.querySelectorAll('[role="tab"]');
-    const index = + targetTab.getAttribute('data-index');
+    const index = targetTab.getAttribute('data-index');
     
     // Update tab states
     tabs.forEach((tab) => {
@@ -214,7 +215,6 @@ function switchTab(e, data) {
     pic.removeAttribute('hidden');
     article.removeAttribute('hidden');
 }
-
        
 function changeTabFocus(e) {
     const keyDownLeft = 37;

@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Frontend Mentor | Space tourism website</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="Space tourism" />
-    <meta name="description" content="Space tourism" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />      
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Space technology">
+    <meta name="description" content="Space technology">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">      
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="FM_part.css" />
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="FM_part.css">
 </head>
 <body class="technology">
   <a class="skip-to-content" href='#main'>Skip to content</a>
   <header class="primary-header flex">
       <div>
-          <img src="./assets/shared/logo.svg" alt="space tourism logo" class="logo" />
+          <img src="./assets/shared/logo.svg" alt="space tourism logo" class="logo">
       </div>
-      <!-- aria-controls is looking for id, so we have create id in ul element -->
       <button class="mobile-nav-toggle" aria-controls="primary-navigation"><span class="sr-only" aria-expanded="false">Menu</span></button>
       <nav>
           <ul id="primary-navigation" data-visible="false" class="primary-navigation flex underline-indicators">
-              <!-- aria-hidden is a little bit of the oposite sr-only. It is hiding it from screen readers, but it is allowing it to still visually be on the page.
-              So we can use this to hide decorative elements or sometimes there's effects where you need to have double content.-->
               <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="index.html"><span aria-hidden="true">00</span>Home</a></li>
               <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="destination.html"><span aria-hidden="true">01</span>Destination</a></li>
               <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="crew.html"><span aria-hidden="true">02</span>Crew</a></li>
@@ -33,81 +30,6 @@
           </ul>
       </nav>
   </header>
-  <main id="main" class="grid-container grid-container--technology flow">
-      <h1 class="numbered-title"><span aria-hidden="true">03</span> Space launch 101</h1>
-      
-      <div class="tech-container">      
-          <div class="num-indicators flex" role="tabList" aria-label="technology list">
-            <button aria-selected="true" aria-controls="vehicle-tab" role="tab" data-image="vehicle-image"
-            tabindex="0">1</button>
-            
-            <button aria-selected="false" aria-controls="spaceport-tab" role="tab" data-image="spaceport-image"
-            tabindex="-1">2</button>
-            
-            <button aria-selected="false" aria-controls="capsule-tab" role="tab" data-image="capsule-image"
-            tabindex="-1">3</button>
-          </div>
-      
-           <!-- vehicle -->
-           <article class="tech-details flow" id="vehicle-tab" role="tabpanel" tabindex="0">
-            <header class="flow flow--space-small">
-                <h2 class="fs-32 uppercase ff-serif">The terminology...</h2>
-                <p class="fs-56 uppercase ff-serif">Launch vehicle</p>
-            </header>
-            <p>A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a 
-              payload from Earth's surface to space, usually to Earth orbit or beyond. Our 
-              WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, 
-              it's quite an awe-inspiring sight on the launch pad!</p>
-          </article>
-          
-           <!-- spaceport -->
-           <article hidden class="tech-details flow" id="spaceport-tab" role="tabpanel" tabindex="0">
-            <header class="flow flow--space-small">
-                <h2 class="fs-32 uppercase ff-serif">The terminology...</h2>
-                <p class="fs-56 uppercase ff-serif">Spaceport</p>
-            </header>
-            <p>A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, 
-                by analogy to the seaport for ships or airport for aircraft. Based in the 
-                famous Cape Canaveral, our spaceport is ideally situated to take advantage 
-                of the Earth’s rotation for launch.</p>
-          </article>
-          
-           <!-- capsule -->
-           <article hidden class="tech-details flow" id="capsule-tab" role="tabpanel" tabindex="0">
-            <header class="flow flow--space-small">
-                <h2 class="fs-32 uppercase ff-serif">The terminology...</h2>
-                <p class="fs-56 uppercase ff-serif">Space capsule</p>
-            </header>
-            <p>A space capsule is an often-crewed spacecraft that uses a blunt-body reentry 
-                capsule to reenter the Earth's atmosphere without wings. Our capsule is where 
-                you'll spend your time during the flight. It includes a space gym, cinema, 
-                and plenty of other activities to keep you entertained.</p>
-          </article>
-        
-          <picture id="vehicle-image">
-            <source media="(max-width: 34.999em)" srcset="./assets/technology/image-launch-vehicle-portrait.jpg">
-            <source media="(min-width: 35em) and (max-width: 44.999em)" srcset="./assets/technology/image-launch-vehicle-landscape.jpg">
-            <source media="(min-width: 45em)" srcset="./assets/technology/image-launch-vehicle-portrait.jpg">
-            <img src="./assets/technology/image-launch-vehicle-portrait.jpg" alt="The launch vehicle" />
-          </picture>
-          
-          <picture hidden id="spaceport-image">
-            <source media="(max-width: 34.999em)" srcset="./assets/technology/image-spaceport-portrait.jpg">
-            <source media="(min-width: 35em) and (max-width: 44.999em)" srcset="./assets/technology/image-spaceport-landscape.jpg">
-            <source media="(min-width: 45em)" srcset="./assets/technology/image-spaceport-portrait.jpg">
-            <img src="./assets/technology/image-spaceport-portrait.jpg" alt="The spaceport" />
-          </picture>
-          
-          <picture hidden id="capsule-image">
-            <source media="(max-width: 34.999em)" srcset="./assets/technology/image-space-capsule-portrait.jpg">
-            <source media="(min-width: 35em) and (max-width: 44.999em)" srcset="./assets/technology/image-space-capsule-landscape.jpg">
-            <source media="(min-width: 45em)" srcset="./assets/technology/image-space-capsule-portrait.jpg">
-            <img src="./assets/technology/image-space-capsule-portrait.jpg" alt="The space capsule" />
-          </picture>
-          
-          
-      </div>
-    </main>
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

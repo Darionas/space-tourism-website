@@ -1,23 +1,18 @@
-/* It is good practice to start with own class and then add the utilities after
-or vice versa. Do all the utilities first and then add the more component based
-one after just to make it so it's very consistent every time you do it.
-I prefer having the component first and then all my utility classes */
+
 
 /* ---------------------- */
 /* Custom properties      */
 /* ---------------------- */
 :root {
-    /*hsl(230, 35, 7) if we store it like this in a custom property we lose the ability to manipulate
-    that alpha value very easily. It is beter solution to store this value 230 35 7*/
-    --clr-dark: 230 35% 7%; /*hsl(230, 35, 7 / .5) - here .5 is alpha value*/
+    --clr-dark: 230 35% 7%; 
     --clr-light: 231 77% 90%;
     --clr-white: 0 0% 100%;
     
     /* fonts */
-    --fs-144: clamp(5rem, 8vw + 1rem,9.375rem);
+    --fs-144: clamp(5rem, 8vw + 1rem, 9.375rem);
     --fs-100: 3.5rem;
     --fs-56: 1.5rem;
-    --fs-32: 1rem;
+    --fs-32: 1.125rem;
     --fs-28: 1rem;
     --fs-18: 0.9375rem;
     --fs-16: 1rem;
@@ -29,7 +24,7 @@ I prefer having the component first and then all my utility classes */
     --ff-sans-normal: "Barlow", sans-serif;
 }
 
-@media (min-width: 35em /* 560px */) {
+@media (min-width: 35em) {
     :root{
         --fs-100: 5rem;
         --fs-56: 2.5rem;
@@ -39,7 +34,7 @@ I prefer having the component first and then all my utility classes */
     }
 }
 
-@media (min-width: 45em /* 720px */) {
+@media (min-width: 45em) {
     :root {
         --fs-100: 6.25rem;
         --fs-56: 3.5rem;
@@ -57,12 +52,12 @@ I prefer having the component first and then all my utility classes */
 
 .flex {
     display: flex;
-    gap: var(--gap, 1rem); /* 1rem is default value */
+    gap: var(--gap, 1rem);
 }
 
 .grid {
     display: grid;
-    gap: var(--gap, 1rem); /* 1rem is default value */
+    gap: var(--gap, 1rem);
 }
 
 .d-block {
@@ -70,66 +65,9 @@ I prefer having the component first and then all my utility classes */
 }
 
 /* adding spacing */
-/* .flow > * + * { margin-top: 1rem; outline: 1px solid red; } It is looking for 
-element that have adjacent siblings that come before it.
- or you can write *:not(:first-child) - it is saying anything that's not the 
- the first child. The same with last child - *:not(:last-child).
-     Why we are not selecting first child? 
- You can do this with last child as well, but instead of margin-top you should
- use margin-bottom. And the reason we like doing that is just if we write 
- .flow > * { mrgin-bottom: 1em } where we adding the margin bottom - it is going
- to mess up our space at the bottom. This space here is actually twice as big as
- the space on the top. So what we are trying to do here is say the first element
- has no space on the top and the last element has no space on the bottom. 
- I am very used to doing this with doing it on the margin top version of it with
- this being first child. I am working this way. 
- .flow > *:not(:first-child) { margin-top: 1rem; outline: 1px solid red; }
- You can in the future, if ever you use this, you could choose whichever way makes
- more sense to you, but this is just what I have gotten used to. And I use it 
- basically in all my projects now. 
-    We are gonna do one more modification to this. And reason that Andy does it with 
-the star plus star .flow > * + * { } is this has no extra specificity to it. The flow
-has the specificity which is important because on our paragraphs and all our headings,
-we set a margin of zero. So we need this to overwrite that to add a margin top on them,
-but this does not actually add any specificity. Whereas when we do this
-.flow > *:not(:first-child) {}, this is a pseudo class which has the same specificity as
-a class selector. And that does lead to potential problems where you can not overwrite 
-something or you need an important somewhere. So one way that we can actually overcome 
-that is with a very modern piece of CSS, and it makes this a little bit more verbose. 
-We can add 'where'. And if you have never seen this, 'where' and 'is' are new selectors
-that we have. If we did an 'is' .flow > *:is(:not(:first-child)) { } , it is not actually 
-going to help at all. It is the exact same situation. 'where' and 'is' are generally used
-as a different way to group things. 
-Example of using 'where':
 
-.card h1,
-.card h2,
-.card h3,
-.card h4 {}
-
-Instead of this:
-.card :where(h1, h2, h3, h4) {} or
-.card :is(h1, h2, h3, h4) {}
-
-The difference between 'is' and 'where' is 'is' will take the highest specificity
-selector inside here and apply it to that entire rule. 'where' on the other hand,
-does not add any specificity - this is actually used in the sanitized CSS reset now,
-and I have started seeing it in other resets as well. So it is sort of a new way 
-that we can eliminate specificity from selectors to make it easier to overwrite 
-in situations where we might have to. 
-   But just to show you where the power of this margin-top: var(--flow-space, 1rem);
-comes from is I can come now on an line style and one popular way to do this is with 
-inline style. Of course, you could come in with an extra class and modify it on a 
-class too. What I can do on here is I can actually redefine my custom property in 
-HTML line: <div class="flow" style="flex-basis: 100%; --flow-space: 4rem;">
- */
 .flow > *:where(:not(:first-child)) {  
-    margin-top: var(--flow-space, 1rem);
-    /* outline: 1px solid red; */
-}
-
-.flow--space-small {
-    --flow-space: .5rem;
+    margin-top: var(--flow-space, 1.5rem);
 }
 
 .container {
@@ -214,19 +152,14 @@ body {
     overflow-x: hidden;
 }
 
-/* body > * {
-    border: 2px solid red;
-} */
-
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
 }
 
 .numbered-title {
     font-family: var(--ff-sans-cond);
-    font-size: var(--fs-28);
-    /* color: hsl(var(--clr-white)); */
-    letter-spacing: 4.72px; /* ??? */
+    font-size: var(--fs-16);
+    letter-spacing: 4.72px;
     text-transform: uppercase;
 }
 
@@ -241,28 +174,16 @@ h1, h2, h3, h4, h5, h6 {
 /* ---------------------- */
 
 .large-button {
-    font-size: 2rem;
+    font-size: 1.125rem;
     position: relative;
     display: inline-grid;
     z-index: 1;
     place-items: center;
-    /* The reason I am using em here is if ever the font size were
-    to change, the padding would drow or shrink with it.*/
     padding: 0 2em;
+    margin-block: 7.4rem;
     border-radius: 50%;
-    /* We wanna give it some height, one thing I usually want buttons is
-    I give them very often a display of inline block. In this case, I am
-    going to, instead of that, give it a display of grid. We use a block
-    element and here because we are working with a link, which is an 
-    inline element. We can not really give that padding top and bottom. 
-    You can, but it does not work or a height would not work on it.
-    And it would actually overlap with the content that's here if we 
-    can get the padding working. So I am doing a display grid. Often, it
-    would be a display in line block. And then I do need it give it a 
-    height. Here we have modern CSS solutions that we can use instead, 
-    and I am gonna give this an aspect ratio. It turns a block element
-    into perfect square. And grid let's align items in the center.*/
-    aspect-ratio: 1 / 1; /* 1 / 1 - with / height. Here you can also use just one value as 1*/
+    width: 9rem;
+    aspect-ratio: 1 / 1;
     text-decoration: none;
 }
 
@@ -276,7 +197,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: hsl(var(--clr-white) / .1);
     opacity: 0;
     transition: opacity 500ms linear, transform 750ms ease-in-out;
-    /* border: 2px solid white; */
 }
 
 .large-button:hover::after,
@@ -286,12 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* primary-header */
-/* In middle value in clamp function we did not plus one rem value. So with
-typography, viewport units do not zoom if you are zooming in and out
-on your browser because they are linked to the size of the viewport. And
-if somebody's zooming in, it's probably because they want the text to be
-bigger. For the layout itself and for the positioning of the logo, I do not
-mind if it does not shift or move around if somebody's zooming in or out.*/
+
 .logo {
     margin: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
 }
@@ -301,8 +216,6 @@ mind if it does not shift or move around if somebody's zooming in or out.*/
     align-items: center;
 }
 
-/* Default selectors have to be before @media query or they 
-will overwrite your @media query*/
 .primary-navigation {
     --gap: clamp(1.5rem, 5vw, 3.5rem);
     --underline-gap: 2rem;
@@ -310,14 +223,12 @@ will overwrite your @media query*/
     background-color: hsl( var(--clr-dark) / 0.95);
 }
 
-/* If browser support backdrop-filter property and its value then it will be implemented */
 @supports (backdrop-filter: blur(1.5rem)) {
     .primary-navigation {
         background-color: hsl(var(--clr-white) / 0.05);
-        /* style is called glassmorphism */
         backdrop-filter: blur(1.5rem);
    }
-} /*  ????? */
+}
 
 .primary-navigation a {
     text-decoration: none;
@@ -377,11 +288,7 @@ will overwrite your @media query*/
         background-image: url(./assets/shared/icon-close.svg);
         background-repeat: no-repeat;
     }
-    
-    /* What the focus visible does, it is sort of what you wanted focus to
-    be the entire time. So if I come in and push tab, it's actually gonna
-    highlight it and I am gonna get it and then I can push my button and 
-    I know that's what's selected. And can navigate in this menu.*/
+       
     .mobile-nav-toggle:focus-visible {
         outline: 5px solid white;
         outline-offset: 5px;
@@ -411,7 +318,6 @@ will overwrite your @media query*/
         order: 1;
         margin-inline: 1rem -3rem;
         z-index: 1700;
-        /* outline: 2px solid white; */
     }
     
     nav {
@@ -419,7 +325,6 @@ will overwrite your @media query*/
     }
 
     .primary-navigation {
-        /* margin-block - for element top and bottom*/
         margin-block: 2rem;
     }
     
@@ -428,6 +333,7 @@ will overwrite your @media query*/
 .underline-indicators > * {
     padding: var(--underline-gap, .5rem) 0;
     border: 0;
+    font-size: var(--fs-14);
     cursor: pointer;
     border-bottom: .2rem solid hsl(var(--clr-white) / 0);
     background-color: transparent;
@@ -453,7 +359,6 @@ will overwrite your @media query*/
     background-color: hsl(var(--clr-white) / .25);
     border: none;
     border-radius: 50%;
-    /* aspect-ratio: 1 / 1; */
     padding: .5em;
 }
 
@@ -470,7 +375,6 @@ will overwrite your @media query*/
 .num-indicators > * {
     cursor: pointer;
     color: hsl(var(--clr-white));
-    /* min-width: 4em; */
     width: clamp(2.5rem, 7vw + 1rem, 5rem);
     background-color: hsl(var(--clr-white) / 0);
     border: 1px solid hsl(var(--clr-white) / .2);
@@ -500,6 +404,7 @@ body {
 
 /* home */
 .home {
+    background-position: center top;
     background-image: url(./assets/home/background-home-mobile.jpg);
 }
 
@@ -577,9 +482,13 @@ body {
     display: grid;
     text-align: center;
     place-items: center;
-    /* padding-inline: 1rem;
-    padding-bottom: 3rem; */
-    padding: 1rem 1rem 3rem 1rem;
+    align-items: start;
+    padding: 1.5rem;
+}
+
+/* home layout */
+.intro > h1 span {
+    margin-top: 1.5rem;
 }
 
 .grid-container p:not([class]) {
@@ -593,7 +502,6 @@ body {
 
 /* destination layout */
 .grid-container--destination {
-    --flow-space: 2rem;
     grid-template-areas:
         'title'
         'image'
@@ -604,22 +512,27 @@ body {
 .grid-container--destination > picture {
     grid-area: image;
     max-width: 60%;
-    align-self: start; /* Its not let jump image on desktop layout, it is fixed to the top*/
+    padding-block: 1.625rem;
+    align-self: center;
 }
 
 .grid-container--destination > .tab-list {
     grid-area: tabs;
 }
 
-.grid-container--destination > .destination-info {
+.grid-container--destination > .destination-details {
     grid-area: content;
+}
+
+.destination-details  > p:not([class]) {
+    margin-top: 1rem;
 }
 
 .destination-meta {
     flex-direction: column;
     border-top: 1px solid hsl(var(--clr-white) / .1);
-    padding-top: 2.5rem;
-    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
     text-align: center;
 }
 
@@ -630,7 +543,6 @@ body {
 
 /* crew layout */
 .grid-container--crew {
-    --flow-space: 2rem;
     grid-template-areas:
         'title'
         'content'
@@ -638,88 +550,131 @@ body {
         'image';
 }
 
-.grid-container--crew > picture {
-    grid-area: image;
-    max-width: 60%;
-    /* background-image: linear-gradient(rgba(217, 217, 217, 0) 77%, rgba(217, 217, 217, 0.25) 100%);
-    backdrop-filter: blur(4rem); */
-    border-bottom: 1px solid hsl(var(--clr-white) / .1);
-    /* box-shadow: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.25); */
-    /* background: linear-gradient(to bottom, #D9D9D9 77%, #D9D9D9 100%); */
-}
-
-.grid-container--crew > .dot-indicators {
-    grid-area: dots;
+.grid-container--crew > .numbered-title {
+    margin-bottom: 1.5rem;
 }
 
 .grid-container--crew > .crew-details {
     grid-area: content;
+    margin-top: 2.5rem;
 }
 
-.crew-details h2 {
+.crew-details header > * {
+    --flow-space: 0.5rem;
+}
+
+.crew-details header h2 {
     color: hsl(var(--clr-white) / .5);
+}
+
+.crew-details p:not([class]) {
+    line-height: 1.8;
+    min-height: 10.24rem;
+}
+
+.grid-container--crew > .dot-indicators {
+    grid-area: dots;
+    gap: 1rem;
 } 
+
+.grid-container--crew > picture {
+    --flow-space: 2rem;
+    grid-area: image;
+    max-width: 80%;
+    height: auto;
+    border-bottom: 1px solid hsl(var(--clr-white) / .1);
+}
 
 /* technology layout */
 .grid-container--technology {
-    --flow-space: 2rem;
-    grid-template-areas:
-        'title'
-        'techs';
-    row-gap: 1.5rem;
-    justify-items: center;
-    padding-inline: 0;
-}
-
-.grid-container--technology > .tech-container {
-    grid-area: techs;
-    display: grid;
     grid-template-areas:
         'title'
         'image'
         'nums'
         'content';
     justify-items: center;
+    padding-inline: 0;
 }
 
-.tech-container > picture {
+.grid-container--technology > *:not(picture) {
+    padding-inline: 1.5rem;
+}
+
+.grid-container--technology > .numbered-title {
+    margin-bottom: 1.5rem;
+}
+
+.grid-container--technology > picture {
     grid-area: image;
     clip-path: inset(28% 0 0 0);
     margin: -4rem 0 0 0;
-    padding-inline: 0;
     width: 100%;
 }
 
-.tech-container > picture img {
-   object-fit: cover;
-}
-
-.tech-container > .num-indicators {
+.grid-container--technology > .num-indicators {
     grid-area: nums;
     --gap: 1rem;
     margin-top: 2rem;
 }
 
-.tech-container > .tech-details {
+.grid-container--technology > .num-indicators > * {
+    font-size: var(--fs-32);
+}
+
+.grid-container--technology > .technology-details {
     grid-area: content;
     margin-top: 2.5rem;
 }
 
-.tech-details h2 {
-    margin-bottom: 1rem;
+.technology-details header h2 {
     color: hsl(var(--clr-white) / .5);
 }
 
-.tech-details > p:not([class]) {
+.technology-details header p {
+    --flow-space: 1rem;
+}
+
+.technology-details > p:not([class]) {
    margin: auto;
    margin-top: 1rem;
 }
 
 @media (min-width: 35em) {
+    .grid-container--home {
+        padding: 8rem 2.5rem;
+    }
+
     .numbered-title {
         justify-self: start; 
-        margin-top: 2rem;
+        font-size: var(--fs-20);
     }
+    
+    .underline-indicators > * {
+        font-size: var(--fs-16);
+    }
+    
+    .large-button {
+        width: 17rem;
+        font-size: 2rem;
+        margin-top: 4.125rem;
+    }
+    
+    .grid-container--destination {
+       padding: 2.5rem;
+    }
+    
+    .grid-container--destination > .destination-details {
+        min-height: 20rem;
+    }
+    
+    .grid-container--destination > picture {
+        align-self: center;
+    }
+    
+    .grid-container--destination > picture img {
+        max-width: 80%;
+        height: auto;
+     }
     
     .destination-meta {
         flex-direction: row;
@@ -727,27 +682,47 @@ body {
     }
     
     .grid-container--crew {
-        padding-bottom: 0;
+        padding: 2.5rem;
     }
     
-    .grid-container--technology > .numbered-title {
+    .grid-container--crew > .numbered-title {
+         margin-bottom: 1.5rem;
+    }
+       
+    .crew-details {
+        margin-top: 2.5rem;
+    }
+    
+    .crew-details header > * {
+        --flow-space: 1rem;
+    }
+    
+    .crew-details > p {
+        justify-self: center;
+        max-width: 32rem;
+    }
+    
+    .grid-container--crew > picture{
+        margin-top: 2rem;
+    }
+    
+    .grid-container--technology {
+        padding-block: 2.5rem;
+        padding-inline: 0;
+    }
+    
+    .grid-container--technology > *:not(picture) {
         padding-inline: 2.5rem;
     }
-    
 }
 
 @media (min-width: 45em) {
     .grid-container {
-        /* place-items: end; */
         text-align: left;
-        column-gap: var(--container-gap, 2rem); /* 2rem */
-        grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(1rem, 1fr); /* 1rem */
+        column-gap: var(--container-gap, 2rem);
+        grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 34rem)) minmax(1rem, 1fr);
     }
         
-    /*For padding bottom we specify max function which would be 6rem and
-    20vh viewport height. Advantage of this is if somebody was on a really
-    big screen, you do not want it all the way stuck on the bottom. And 
-    this max function, it will take the bigger of the two values.  */
     .grid-container--home {
         padding-bottom: max(6rem, 20vh);
         align-items: end;
@@ -755,118 +730,154 @@ body {
     
     .grid-container--home > *:first-child {
         grid-column: 2;
-        /* outline: 2px solid red; */
+
+    }
+    
+    .grid-container p:not([class]) {
+        max-width: 100%;
     }
     
     .grid-container--home > *:last-child {
         grid-column: 3;
-        place-self: end; /* mano */
-        /* outline: 2px solid blue; */
+        place-self: end;
     }
     
-    /* The scrollbar-gutter property in CSS is used to control the space allocated for a scrollbar when 
-    it appears or disappears. It helps prevent layout shifts caused by scrollbars appearing dynamically.
-    scrollbar-gutter: auto | stable | always | both-edges;
-        auto (default): The gutter appears only when the scrollbar is present.
-        stable: Reserves space for the scrollbar even when it’s not needed, preventing layout shifts.
-        always: Similar to stable, but ensures the scrollbar is always visible.
-        both-edges: Reserves space for scrollbars on both sides (useful for direction: rtl or vertical writing modes).*/
-    .destination {
+    .large-button {
+        margin-block: auto;
+        align-self: center;
+    }
+    
+    .numbered-title {
+        font-size: var(--fs-28);
+    }
+    
+    .destination, .crew, .technology {
         scrollbar-gutter: stable;
     }
     
     .grid-container--destination {
+        grid-template-columns: minmax(1rem, 1fr) minmax(0, 30rem) minmax(0, 28rem) minmax(1rem, 1fr);
         grid-template-areas:
             '. title title .'
             '. image tabs .'
             '. image content .';
         justify-items: start;
         align-content: start;
+        padding-top: 3rem;
+    }
+    
+    .grid-container--destination > .underline-indicators,
+    .grid-container--destination > picture {
+        margin-top: 5rem;
     }
     
     .grid-container--destination > picture {
-        max-width: 90%;
+        max-width: 100%;
+        align-self: start;
+    }
+    
+    .grid-container--destination > picture img{
+        max-width: 100%;
+    }
+    
+    .grid-container--destination > .destination-details {
+        --flow-space: 2.5rem;
     }
     
     .destination-meta {
         justify-content: start;
         --gap: min(6vw, 6rem);
+        padding-top: 2.5rem;
+        margin-top: 2.5rem;
     }
     
     .grid-container--crew {
-        grid-template-columns: minmax(1rem, 1fr) minmax(0, 40rem) minmax(0, 15rem) minmax(1rem, 1fr); 
-        justify-items: start;
         grid-template-areas:
             '. title title .'
             '. content image .'
             '. dots image .';
+        --container-gap: 0;
+        gap: 2rem;
+        justify-items: start;
+        align-content: start;
+        padding-top: 3rem;
     }
     
+    .grid-container--crew > .crew-details {
+        align-self: end;
+    }
     
+    .crew-details > header p {
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    
+    .crew-details p {
+        justify-self: start;
+        width: 100%;
+    }
     
     .grid-container--crew > picture {
-        grid-column: span 2;
-        align-self: end;
-        max-width: 90%;
+        max-width: 100%;
+        align-self: center;
     }
     
-    .crew-details {
-        max-width: 90%;
-        /* word-wrap: break-word; */
+    .grid-container--crew > picture img {
+         max-height: 35rem;
+         width: auto;
     }
     
-    
+    .grid-container--crew > .dot-indicators {
+        align-self: center;
+        gap: 2.5rem;
+    }
+
     .grid-container--technology {
-        /* grid-template-columns: minmax(0, 4rem) minmax(0, 3rem) minmax(0, 30rem) minmax(0rem, 20rem);  */
-        grid-template-columns: minmax(10rem, 20rem) minmax(0, 5rem) minmax(1fr, 35rem) minmax(0, 100%);
+        grid-template-columns: minmax(1rem, auto) minmax(0rem, 10rem) minmax(0rem, 31rem) minmax(0rem, 38rem);
         grid-template-areas:
             '. title title .'
-            '. techs techs techs';
-        justify-items: start;
-        align-items: start;
+            '. nums content image';
+        justify-content: center;
+        align-content: start;
+        padding: 3rem 0 3rem 0;
+        gap: 0;
     }
     
     .grid-container--technology > .numbered-title {
         padding-inline: 0;
+        align-self: center;
     }
     
-    .grid-container--technology > .tech-container {
-        grid-area: techs;
-        display: flex;
-        width: 100%;
-        height: auto;
-        align-items: center;
-    }
-    
-    .tech-container > .num-indicators {
+    .grid-container--technology > .num-indicators {
         flex-direction: column;
         align-self: center;
         margin: 0 4rem 0 0;
         --gap: 2rem;
+        padding: 0;
     }
     
-    .tech-container > .tech-details {
+    .grid-container--technology > .technology-details {
         align-self: center;
         width: 100%;
-        margin: 0 2rem 0 0 ;
+        padding-inline: 0;
+        margin-block: 0;
+        margin-right: 2rem;
     }
     
-    .tech-details p:not([class]) {
-        margin: 1.5rem 0;
+    .technology-details p:not([class]) {
+        margin-top: 1.5rem;
     }
     
-    .tech-container > picture {
+    .grid-container--technology > picture {
         clip-path: inset(5% 0 0 0);
-        flex-grow: 1;
+        margin-left: 2rem;
         margin-block: auto;
     }
     
-    .tech-container > picture img{
-        width: 38em;
-        display: block;
-        justify-self: end;
-
+    .grid-container--technology > picture img{
+        width: 100%;
+        height: auto;
     }
-    
 }
+
 

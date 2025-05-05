@@ -3,7 +3,6 @@
 
 const nav = document.querySelector('.primary-navigation');
 const navToggle = document.querySelector('.mobile-nav-toggle');
-let tabFocus = 0;
 
 // hamburger button
 navToggle.addEventListener('click', () => {
@@ -87,7 +86,7 @@ function populatePage(data, type) {
     const tabs = tabList.querySelectorAll('[role="tab"]');
     tabs.forEach((tab) => {
         tab.addEventListener('click', (e) => {
-            switchTab(e, data);
+            switchTab(e, data, type);
         });
     });
 }
@@ -186,12 +185,16 @@ function createContent(item, index, type) {
     return {picture, article};
 }
 
-function switchTab(e, data) {
-    const targetTab = e.target;
+function switchTab(e, data, type) {
+    // Ensure the target is a tab
+    const targetTab = e.target.closest('[role="tab"]');
+    if (!targetTab) return;
+
     const tabList = targetTab.parentNode;
     const tabs = tabList.querySelectorAll('[role="tab"]');
     const index = + targetTab.getAttribute('data-index');
-    
+
+
     // Update tab states
     tabs.forEach((tab) => {
         tab.setAttribute('aria-selected', 'false');
@@ -200,21 +203,24 @@ function switchTab(e, data) {
     targetTab.setAttribute('aria-selected', 'true');
     targetTab.setAttribute('tabindex', '0');
 
-
     // Hide all pictures and articles
-    const main = tabList.parentNode;
+    const main = document.querySelector('main');
     const pictures = main.querySelectorAll('picture');
     const articles = main.querySelectorAll('[role="tabpanel"]');
     pictures.forEach((pic) => pic.setAttribute('hidden', true));
     articles.forEach((article) => article.setAttribute('hidden', true));
 
-    // Show the selected picture and article
-    const pic = main.querySelector(`#${data[index].name.toLowerCase().replace(' ', '-')}-image`);
-    const article = main.querySelector(`#${data[index].name.toLowerCase().replace(' ', '-')}-tab`);
-    pic.removeAttribute('hidden');
-    article.removeAttribute('hidden');
-}
+    // Sanitize the selector
+    function sanitizeSelector(name) {
+        return name.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+    }
 
+    // Show the selected picture and article
+    const pic = main.querySelector(`#${sanitizeSelector(data[index].name)}-image`);
+    const article = main.querySelector(`#${sanitizeSelector(data[index].name)}-tab`);
+    if (pic) pic.removeAttribute('hidden');
+    if (article) article.removeAttribute('hidden');
+}
        
 function changeTabFocus(e) {
     const keyDownLeft = 37;
@@ -222,6 +228,7 @@ function changeTabFocus(e) {
     
     const tabList = e.target.parentNode;
     const tabs = tabList.querySelectorAll('[role="tab"]');
+    let tabFocus = Array.from(tabs).indexOf(e.target);
     
     //change the tabIndex of the current tab to -1
     if(e.keyCode === keyDownLeft || e.keyCode === keyDownRight) {
